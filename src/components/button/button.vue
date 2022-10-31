@@ -1,7 +1,8 @@
 <template>
   <div class="s-button">
     <div class="s-button-content" :class="`s-button-${type} s-button-content-${size}`" :style="{borderRadius:`${sharp ? (sharp.toLowerCase() === 'circle' ?  '4px' : 0) : '4px'}`}">
-      <Icon class="button-icon" :icon="icon" v-if="icon" />
+      <Icon class="button-icon" :icon="icon" v-if="icon && !loading" />
+      <Icon class="loading button-icon" v-if="loading" icon="loading" size="18"/>
       <div class="s-button-main">
         <slot />
       </div>
@@ -34,6 +35,11 @@ const props = defineProps({
       }
     }
   },
+  loading:{
+    type:Boolean,
+    required:false,
+    default:false
+  },
   shape:{
     type:String,
     required:false,
@@ -53,6 +59,14 @@ const props = defineProps({
 </script>
 <style lang="less">
 @import '../_var.less';
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .s-button{
   cursor: pointer;
   display:inline-block;
@@ -64,6 +78,9 @@ const props = defineProps({
     .button-icon{
       order: 1;
       margin-right:0.3em;
+      &.loading{
+        animation: spin 1s linear infinite;
+      }
     }
     .s-button-main{
       order:2;

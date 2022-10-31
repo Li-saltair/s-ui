@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div style="background:#000;padding:20px;">
-    <Button type="primary" icon="huangguan">Hello！</Button>
+    <Button type="primary" loading>Hello！</Button>
     <Button type="danger" icon="error" size="large">Hello！</Button>
     <Button type="default" icon="download" size="small">Hello！</Button>
     <Button type="dashed" icon="hand">Hello！</Button>
