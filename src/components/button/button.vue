@@ -64,6 +64,9 @@ const click = ()=>{
 </script>
 <style lang="less">
 @import '../_var.less';
+*{
+  box-sizing: border-box;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -78,7 +81,9 @@ const click = ()=>{
   .s-button-content{
     display:flex;
     align-items: center;
-    padding:10px 16px;
+    padding:0 16px;
+    font-size:@font-size-default;
+    height:@button-default-height;
     transition-duration: 0.4s;
     .button-icon{
       order: 1;
@@ -91,12 +96,13 @@ const click = ()=>{
       order:2;
     }
     &.s-button-content-large{
-      padding:14px 20px;
+      padding:0 18px;
+      height:@button-default-height;
       font-size:@font-size-large;
     }
     &.s-button-content-small{
-      padding:6px 12px;
-      font-size:@font-size-small;
+      padding:0 14px;
+      height:@button-small-height;
     }
     &.s-button-primary{
       background:@main-color;

@@ -13,8 +13,8 @@
       </div>
       <div class="s-dialog-footer">
         <div v-if="!$slots.footer" class="s-dialog-footer-button-group">
-          <Button size="small">确认</Button>
           <Button type="default" size="small" @click="close">取消</Button>
+          <Button size="small">确认</Button>
         </div>
         <slot v-else name="footer"/>
       </div>
@@ -86,9 +86,10 @@ const close = () => {
           display:flex;
           justify-content: flex-end;
           align-content: center;
-          button{
-            padding:10px 16px;
-            border:1px solid #ccc;
+          >.s-button{
+            &:not(:first-child){
+              margin-left:0.6em;
+            }
           }
         }
       }
