@@ -5,6 +5,7 @@
     <Button type="danger" icon="error" size="large">Hello！</Button>
     <Button type="default" icon="download" size="small">Hello！</Button>
     <Button type="dashed" icon="hand">Hello！</Button>
+    <Button type="primary" icon="hand"></Button>
   </div>
   <Icon icon="huangguan" color="#C75872"/>
   <HelloWorld msg="Welcome to Your Vue.js App"/>

@@ -1,5 +1,5 @@
 <template>
-  <div class="s-button">
+  <div class="s-button" @click="$emit('click')">
     <div class="s-button-content" :class="`s-button-${type} s-button-content-${size}`" :style="{borderRadius:`${sharp ? (sharp.toLowerCase() === 'circle' ?  '4px' : 0) : '4px'}`}">
       <Icon class="button-icon" :icon="icon" v-if="icon && !loading" />
       <Icon class="loading button-icon" v-if="loading" icon="loading" size="18"/>
