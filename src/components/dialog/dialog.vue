@@ -13,8 +13,8 @@
       </div>
       <div class="s-dialog-footer">
         <div v-if="!$slots.footer" class="s-dialog-footer-button-group">
-          <button>确认</button>
-          <button @click="close">取消</button>
+          <Button size="small">确认</Button>
+          <Button type="default" size="small" @click="close">取消</Button>
         </div>
         <slot v-else name="footer"/>
       </div>
@@ -22,9 +22,8 @@
   </div>
 </template>
 <script setup>
-// ,defineProps,defineEmits
 import {ref} from 'vue'
-
+import Button from './../button/button.vue'
 const props = defineProps({
   title:{
     type:[String,Number],

@@ -1,5 +1,5 @@
 <template>
-  <div class="s-button" @click="$emit('click')">
+  <div class="s-button" @click="click">
     <div class="s-button-content" :class="`s-button-${type} s-button-content-${size}`" :style="{borderRadius:`${sharp ? (sharp.toLowerCase() === 'circle' ?  '4px' : 0) : '4px'}`}">
       <Icon class="button-icon" :icon="icon" v-if="icon && !loading" />
       <Icon class="loading button-icon" v-if="loading" icon="loading" size="18"/>
@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import Icon from './../icon.vue'
-import { defineProps } from 'vue'
+// import { defineProps, defineEmits } from 'vue'
 const props = defineProps({
   type:{
     type:String,
@@ -56,6 +56,11 @@ const props = defineProps({
     required:false
   }
 })
+
+const emit = defineEmits(['click'])
+const click = ()=>{
+  emit('click')
+}
 </script>
 <style lang="less">
 @import '../_var.less';
