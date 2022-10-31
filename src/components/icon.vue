@@ -1,5 +1,5 @@
 <template>
-  <svg class="s-icon" aria-hidden="true" :style="{fontSize:`${size}px`,color:`${color}`}">
+  <svg class="s-icon" aria-hidden="true" :style="{fontSize:Number.isNaN(size) ? 'inherit' : `${size}px`,color:`${color}`}">
     <use :xlink:href="`#i-${icon}`"></use>
 </svg>
 </template>
@@ -13,14 +13,16 @@ const props = defineProps({
     required:true
   },
   size:{
-    type:Number,
+    type:[Number,String],
     required:false,
-    default:20
+    // default:20
+    default:'inherit'
   },
   color:{
     type:String,
     required:false,
-    default:'#C75872'
+    // default:'#C75872'
+    default:'inherit'
   }
 })
 </script>

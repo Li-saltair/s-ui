@@ -1,10 +1,8 @@
 <template>
   <div class="s-button">
-    <div class="s-button-content" :class="`s-button-${type}`" :style="{borderRadius:`${sharp.toLowerCase() === 'circle' ?  '4px' : 0}`}">
-      <div v-if="icon">
-        <Icon :icon="icon" />
-      </div>
-      <div >
+    <div class="s-button-content" :class="`s-button-${type} s-button-content-${size}`" :style="{borderRadius:`${sharp ? (sharp.toLowerCase() === 'circle' ?  '4px' : 0) : '4px'}`}">
+      <Icon class="button-icon" :icon="icon" v-if="icon" />
+      <div class="s-button-main">
         <slot />
       </div>
     </div>
@@ -19,8 +17,21 @@ const props = defineProps({
     required:false,
     default:'primary',
     validate:value=>{
-      const valueFormat = value.toLowerCase()
-      return valueFormat === 'primary' || valueFormat === 'default' || valueFormat === 'danger' || valueFormat === 'ghost' || valueFormat === 'dashed'
+      if(value){
+        const valueFormat = value.toLowerCase()
+        return valueFormat === 'primary' || valueFormat === 'default' || valueFormat === 'danger' || valueFormat === 'ghost' || valueFormat === 'dashed'
+      }
+    }
+  },
+  size:{
+    type:String,
+    required:false,
+    default:'default',
+    validate:value=>{
+      if(value){
+        const valueFormat = value.toLowerCase()
+        return value === 'small' || value === 'large' || value === 'default'
+      }
     }
   },
   shape:{
@@ -28,8 +39,10 @@ const props = defineProps({
     required:false,
     default:'circle',
     validate:value=>{
-      const valueFormat = value.toLowerCase()
-      return value === 'circle' || value === 'round'
+      if(value){
+        const valueFormat = value.toLowerCase()
+        return value === 'circle' || value === 'round'
+      }
     }
   },
   icon:{
@@ -39,27 +52,70 @@ const props = defineProps({
 })
 </script>
 <style lang="less">
-@import '../var';
-  .s-button{
-    .s-button-content{
-      &.s-button-primary{
-        background:@background;
-        color:@button-font;
+@import '../_var.less';
+.s-button{
+  cursor: pointer;
+  display:inline-block;
+  .s-button-content{
+    display:flex;
+    align-items: center;
+    padding:10px 16px;
+    transition-duration: 0.4s;
+    .button-icon{
+      order: 1;
+      margin-right:0.3em;
+    }
+    .s-button-main{
+      order:2;
+    }
+    &.s-button-content-large{
+      padding:14px 20px;
+      font-size:@font-size-large;
+    }
+    &.s-button-content-small{
+      padding:6px 12px;
+      font-size:@font-size-small;
+    }
+    &.s-button-primary{
+      background:@main-color;
+      color:@main-font-light-color;
+      &:hover{
+        background:@tint-main-color;
       }
-      &.s-button-default{
-        background:@button-bg;
-        border:1px solid @background;
+    }
+    &.s-button-default{
+      background:@button-background;
+      border:1px solid @main-color;
+      &:hover{
+        border:1px solid @tint-main-color;
+        color:@main-color;
       }
-      &.s-button-danger{
-        background:@red;
-        color:@button-font;
+    }
+    &.s-button-danger{
+      background:@danger-color;
+      color:@main-font-light-color;
+      &:hover{
+        background:@tint-danger-color;
       }
-      &.s-button-ghost{
-        background: transparent;
+    }
+    &.s-button-ghost{
+      background: transparent;
+      color:@main-color;
+      border:1px solid @main-color;
+      &:hover{
+        border:1px solid @tint-main-color;
+        color:@tint-main-color;
       }
-      &.s-button-dashed{
-        border:1px solid #dashed;
+    }
+    &.s-button-dashed{
+      border:1px dashed @main-color;
+      color:@main-color;
+      background:@button-background;
+      &:hover{
+        border:1px dashed @tint-main-color;
+        color:@tint-main-color;
       }
     }
   }
+}
 </style>
