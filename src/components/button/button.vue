@@ -1,4 +1,5 @@
 <template>
+<!-- @click="click" -->
   <div class="s-button" @click="click">
     <div class="s-button-content" :class="`s-button-${type} s-button-content-${size}`" :style="{borderRadius:`${sharp ? (sharp.toLowerCase() === 'circle' ?  '4px' : 0) : '4px'}`}">
       <Icon class="button-icon" :icon="icon" v-if="icon && !loading" />
@@ -57,9 +58,14 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['click'])
+// const emit = defineEmits(['click'])
+// const click = ()=>{
+//   emit('click')
+// }
+const emit = defineEmits(['buttonClick'])
 const click = ()=>{
-  emit('click')
+  console.log('测试事件-组件内')
+  emit('buttonClick')
 }
 </script>
 <style lang="less">

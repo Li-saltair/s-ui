@@ -1,7 +1,7 @@
 <template>
   <div class="s-dialog-main" v-if="visible">
-    <div class="s-mask"></div>
-    <div class="s-dialog-content">
+    <div class="s-mask" @click="maskClick"></div>
+    <div class="s-dialog-content" :style="{width:width + 'px'}">
       <div class="s-dialog-header">
         <div v-if="!$slots.title" class="s-title">{{title}}</div>
         <slot v-else name="title" />
@@ -14,7 +14,7 @@
       <div class="s-dialog-footer">
         <div v-if="!$slots.footer" class="s-dialog-footer-button-group">
           <Button type="default" size="small" @click="close">取消</Button>
-          <Button size="small">确认</Button>
+          <Button size="small" @click="close">确认</Button>
         </div>
         <slot v-else name="footer"/>
       </div>
@@ -32,11 +32,26 @@ const props = defineProps({
   visible:{
     type:Boolean,
     default:false
+  },
+  maskClosable:{
+    type:Boolean,
+    required:false,
+    default:true
+  },
+  width:{
+    type:Number,
+    required:false,
+    default:520
   }
 })
 const emitVisble = defineEmits(['update:visible'])
 const close = () => {
   emitVisble('update:visible',false)
+}
+const maskClick = ()=>{
+  if(props.maskClosable){
+    close()
+  }
 }
 </script>
 <style lang="less">
@@ -57,7 +72,6 @@ const close = () => {
       left:50%;
       top:100px;
       transform: translate(-50%,0);
-      width:500px;
       background:#fff;
       border-radius:8px;
       .s-dialog-header{
@@ -66,7 +80,7 @@ const close = () => {
         align-items: center;
         font-weight:500;
         padding:12px;
-        border-bottom:1px solid #ccc;
+        border-bottom:1px solid #ddd;
         .s-title{
           text-align:left;
           font-size:16px;
@@ -77,8 +91,9 @@ const close = () => {
         };
       }
       .s-dialog-body{
+        text-align:left;
         padding:18px;
-        border-bottom:1px solid #ccc;
+        border-bottom:1px solid #ddd;
       }
       .s-dialog-footer{
         padding:18px;
